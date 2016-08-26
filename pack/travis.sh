@@ -281,17 +281,17 @@ if [ -n "${PACKAGECLOUD_TOKEN}" ]; then
     fi
     gem install package_cloud
     if [ "${PACK}" == "rpm" ]; then
-        package_cloud push ${PACKAGECLOUD_REPO}/${OS}/${DIST}/ \
+        package_cloud push ${PACKAGECLOUD_USER}/${PACKAGECLOUD_REPO}/${OS}/${DIST} \
             ${RESULTS}/*[!src].rpm --skip-errors
         if [ "$(echo ${RESULTS}/*.src.rpm)" != "${RESULTS}/*.src.rpm" ]; then
-            package_cloud push ${PACKAGECLOUD_REPO}/${OS}/${DIST}/SRPMS/ \
+            package_cloud push ${PACKAGECLOUD_USER}/${PACKAGECLOUD_REPO}/${OS}/${DIST}/SRPMS \
                 ${RESULTS}/*.src.rpm --skip-errors
         fi
     elif [ "${PACK}" == "deb" ]; then
-        package_cloud push ${PACKAGECLOUD_REPO}/${OS}/${DIST}/ \
+        package_cloud push ${PACKAGECLOUD_USER}/${PACKAGECLOUD_REPO}/${OS}/${DIST} \
             ${RESULTS}/*.deb --skip-errors
         if [ "$(echo ${RESULTS}/*.dsc)" != "${RESULTS}/*.dsc" ]; then
-            package_cloud push ${PACKAGECLOUD_REPO}/${OS}/${DIST}/ \
+            package_cloud push ${PACKAGECLOUD_USER}/${PACKAGECLOUD_REPO}/${OS}/${DIST} \
                 ${RESULTS}/*.dsc --skip-errors
         fi
     fi
